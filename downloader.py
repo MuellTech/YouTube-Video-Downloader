@@ -1,13 +1,15 @@
 from pytube import YouTube
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, simpledialog, messagebox
+import os
 
 def download_video(url, save_path):
   try:
     video = YouTube(url)
+
+    # Get the highest resolution stream
     streams = video.streams.filter(progressive=True, file_extension ='mp4')
     highest_rev_vid = streams.get_highest_resolution(ouput_path = save_path)
-    highest_rev_vid.download(output_path = save_path)
     print('video downloaded successfully')
   except Exception as e:
     print(e)
